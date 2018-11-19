@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FilterBar from './FilterBar';
 import Repos from './Repos';
 import '../css/App.css';
 import axios from 'axios';
@@ -9,7 +10,8 @@ class App extends Component {
     this.state = {
       user: 'djsaun',
       repo: 'weather-mapper',
-      eventTypes: [],
+      eventTypes: ['post', 'pull'],
+      selectedEventType: '',
       events: [],
       eventsLoading: true,
       error: false,
@@ -17,16 +19,26 @@ class App extends Component {
     }
 
     this.retrieveEvents = this.retrieveEvents.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  async retrieveEvents(user, repo, event) {
+  handleFormSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      user: e.target.user.value,
+      repo: e.target.repo.value,
+      selectedEventType: e.target.eventType.value
+    })
+  }
+
+  async retrieveEvents(user, repo) {
     // Set up initial array and API URL variables
     const eventsArr = [];
     const eventTypesArr = [];
     const githubURL = `https://api.github.com/repos/${user}/${repo}/events`;
 
     // If the promise is successfully returned
-    return await axios.get(githubURL)
+    await axios.get(githubURL)
     .then(res => {
       // Add the returned events to the eventsArr array
       eventsArr.push(res.data);
@@ -56,8 +68,12 @@ class App extends Component {
     })
   }
 
-  componentDidMount() { 
-    this.retrieveEvents(this.state.user, this.state.repo);
+  // Check if state has been updated
+  componentDidUpdate(prevProps, prevState) {
+    // If there are new user or repo values, run the retrieve events function
+    if (this.state.user !== prevState.user || this.state.repo !== prevState.repo) {
+      this.retrieveEvents(this.state.user, this.state.repo);
+    }
   }
 
   render() {
@@ -65,6 +81,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
         </header>
+        <FilterBar handleFormSubmit={this.handleFormSubmit} user={this.state.user} repo={this.state.repo} eventTypes={this.state.eventTypes} />
         <Repos repoName={this.state.repo} />
       </div>
     );
