@@ -8,11 +8,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: 'djsaun',
+      owner: 'djsaun',
       repo: 'weather-mapper',
-      eventTypes: ['post', 'pull'],
+      eventTypes: [],
       selectedEventType: '',
       events: [],
+      displayedEvents: [],
       eventsLoading: true,
       error: false,
       error_message: ''
@@ -25,17 +26,17 @@ class App extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     this.setState({
-      user: e.target.user.value,
+      owner: e.target.owner.value,
       repo: e.target.repo.value,
       selectedEventType: e.target.eventType.value
     })
   }
 
-  async retrieveEvents(user, repo) {
+  async retrieveEvents(owner, repo) {
     // Set up initial array and API URL variables
     const eventsArr = [];
     const eventTypesArr = [];
-    const githubURL = `https://api.github.com/repos/${user}/${repo}/events`;
+    const githubURL = `https://api.github.com/repos/${owner}/${repo}/events`;
 
     // If the promise is successfully returned
     await axios.get(githubURL)
@@ -70,19 +71,17 @@ class App extends Component {
 
   // Check if state has been updated
   componentDidUpdate(prevProps, prevState) {
-    // If there are new user or repo values, run the retrieve events function
-    if (this.state.user !== prevState.user || this.state.repo !== prevState.repo) {
-      this.retrieveEvents(this.state.user, this.state.repo);
+    // If there are new owner or repo values, run the retrieve events function
+    if (this.state.owner !== prevState.owner || this.state.repo !== prevState.repo) {
+      this.retrieveEvents(this.state.owner, this.state.repo);
     }
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
-        <FilterBar handleFormSubmit={this.handleFormSubmit} user={this.state.user} repo={this.state.repo} eventTypes={this.state.eventTypes} />
-        <Repos repoName={this.state.repo} />
+      <div className="App container">
+        <FilterBar handleFormSubmit={this.handleFormSubmit} owner={this.state.owner} repo={this.state.repo} eventTypes={this.state.eventTypes} />
+        <Repos events={this.state.events} />
       </div>
     );
   }
