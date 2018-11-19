@@ -32,7 +32,7 @@ class App extends Component {
     })
   }
 
-  async retrieveEvents(owner, repo) {
+  async retrieveEvents(owner, repo, eventType) {
     // Set up initial array and API URL variables
     const eventsArr = [];
     const eventTypesArr = [];
@@ -53,10 +53,15 @@ class App extends Component {
       // Remove all duplicate event type values from the array
       const uniqueEventTypes = Array.from(new Set(eventTypesArr));
 
+      // If an event type is selected, filter those events that match that type and assign them to the displayedEvents variable
+      // If no event type is selected, display all events
+      const displayedEvents = (this.state.selectedEventType ? eventsArr[0].filter(event => event.type === this.state.selectedEventType) : eventsArr[0]);
+
       // Update our state to include the returned events and event types
       this.setState({
         events: eventsArr[0],
         eventTypes: uniqueEventTypes,
+        displayedEvents,
         eventsLoading: false
       });
     })
@@ -72,16 +77,16 @@ class App extends Component {
   // Check if state has been updated
   componentDidUpdate(prevProps, prevState) {
     // If there are new owner or repo values, run the retrieve events function
-    if (this.state.owner !== prevState.owner || this.state.repo !== prevState.repo) {
-      this.retrieveEvents(this.state.owner, this.state.repo);
+    if (this.state.owner !== prevState.owner || this.state.repo !== prevState.repo || this.state.selectedEventType !== prevState.selectedEventType) {
+      this.retrieveEvents(this.state.owner, this.state.repo, this.state.selectedEventType);
     }
   }
 
   render() {
     return (
       <div className="App container">
-        <FilterBar handleFormSubmit={this.handleFormSubmit} owner={this.state.owner} repo={this.state.repo} eventTypes={this.state.eventTypes} />
-        <Repos events={this.state.events} />
+        <FilterBar handleFormSubmit={this.handleFormSubmit} eventTypes={this.state.eventTypes} />
+        <Repos events={this.state.events} displayedEvents={this.state.displayedEvents} />
       </div>
     );
   }

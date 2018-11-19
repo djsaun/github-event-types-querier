@@ -9,7 +9,7 @@ class FilterBar extends React.Component {
   }
 
   render() {
-    const {owner, repo, eventTypes, handleFormSubmit} = this.props;
+    const {eventTypes, handleFormSubmit} = this.props;
     // Conditionally disable the event type select bar depending on if event types are present or not
     let disabled = (!eventTypes.length ? true : null);
     
@@ -18,12 +18,12 @@ class FilterBar extends React.Component {
         <form onSubmit={handleFormSubmit}>
           <div>
             <label htmlFor="owner">Owner</label>
-            <input name="owner" placeholder="owner" defaultValue={owner} ref={this.owner}></input>
+            <input name="owner" placeholder="owner" ref={this.owner}></input>
           </div>
 
           <div>
             <label htmlFor="repo">Repository</label>
-            <input name="repo" placeholder="Repository" defaultValue={repo} ref={this.repo}></input>
+            <input name="repo" placeholder="Repository" ref={this.repo}></input>
           </div>
 
           <div>
@@ -36,7 +36,7 @@ class FilterBar extends React.Component {
               })}
             </select>
           </div>
-          
+
           <input type="submit" value="Submit" />
         </form>
       </div>
