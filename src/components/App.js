@@ -62,7 +62,8 @@ class App extends Component {
         events: eventsArr[0],
         eventTypes: uniqueEventTypes,
         displayedEvents,
-        eventsLoading: false
+        eventsLoading: false,
+        error_message: false
       });
     })
     // Handle the error if the promise doesn't successfully return a result 
@@ -86,7 +87,13 @@ class App extends Component {
     return (
       <div className="App container">
         <FilterBar handleFormSubmit={this.handleFormSubmit} eventTypes={this.state.eventTypes} />
+        {(!this.state.error_message) ?
         <Repos events={this.state.events} displayedEvents={this.state.displayedEvents} />
+        : 
+        <div className="no-results"> 
+          <p>Unable to find any events. Please try again.</p>
+        </div>
+      }
       </div>
     );
   }

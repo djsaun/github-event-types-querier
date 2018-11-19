@@ -9,7 +9,6 @@ class Repos extends React.Component {
     return(
       <div className="events">
         {displayedEvents.map((event, key) => {
-          console.log(event);
           return <div className="event" key={key}>
             <p>Event performed by: <a href={`https://github.com/${event.actor.display_login}`} target="_blank" rel="noopener noreferrer">{event.actor.login}</a></p>
             <p>Event type: {event.type}</p>

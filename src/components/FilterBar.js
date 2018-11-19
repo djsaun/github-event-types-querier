@@ -18,17 +18,17 @@ class FilterBar extends React.Component {
         <form onSubmit={handleFormSubmit}>
           <div>
             <label htmlFor="owner">Owner</label>
-            <input name="owner" placeholder="owner" ref={this.owner}></input>
+            <input name="owner" id="owner" ref={this.owner}></input>
           </div>
 
           <div>
             <label htmlFor="repo">Repository</label>
-            <input name="repo" placeholder="Repository" ref={this.repo}></input>
+            <input name="repo" id="repo" ref={this.repo}></input>
           </div>
 
           <div>
             <label htmlFor="eventType">Event Type</label>
-            <select name="eventType" placeholder="eventType" ref={this.eventType} disabled={disabled ? true : null}>
+            <select name="eventType" id="eventType" placeholder="eventType" ref={this.eventType} disabled={disabled ? true : null}>
               <option value="">Select an Event Type</option>
               {/* Loop through all event types present in the repo */}
               {eventTypes.map((eventType, key) => {

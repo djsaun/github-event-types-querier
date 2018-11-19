@@ -6,6 +6,21 @@
 .filterBar form {
   display: grid;
   grid-template-columns: repeat(3, 1fr) 150px;
+  align-items: center;
+  grid-gap: 30px;
+}
+
+.filterBar form label {
+  display: block;
+}
+
+.filterBar form input, .filterBar form select {
+  width: 100%;
+}
+
+.no-results {
+  margin-top: 40px;
+  text-align: center;
 }
 
 .events {
@@ -16,6 +31,6 @@
 }
 
 .event {
-  padding: 20px;
+  padding: 10px 20px;
   border: 1px solid black;
 }
