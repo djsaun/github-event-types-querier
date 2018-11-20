@@ -21,6 +21,7 @@ class App extends Component {
 
     this.retrieveEvents = this.retrieveEvents.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleFormSubmit(e) {
@@ -29,6 +30,13 @@ class App extends Component {
       owner: e.target.owner.value,
       repo: e.target.repo.value,
       selectedEventType: e.target.eventType.value
+    })
+  }
+
+  handleSelectChange(e) {
+    e.preventDefault();
+    this.setState({
+      selectedEventType: e.target.value
     })
   }
 
@@ -86,7 +94,7 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        <FilterBar handleFormSubmit={this.handleFormSubmit} eventTypes={this.state.eventTypes} />
+        <FilterBar handleFormSubmit={this.handleFormSubmit} handleSelectChange={this.handleSelectChange} eventTypes={this.state.eventTypes} />
         {(!this.state.error_message) ?
         <Repos events={this.state.events} displayedEvents={this.state.displayedEvents} />
         : 

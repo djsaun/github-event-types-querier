@@ -1,21 +1,75 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #FFFFFA;
+}
+
+p {
+  color: #1E2019;
+}
+
+a {
+  font-weight: bold;
+  color: #888DA7;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover, a:active, a:focus {
+  color: #7EA2AA;
+}
+
 .container {
-  padding: 0 40px;
+  margin: 0 auto;
+  padding: 40px;
   max-width: 1200px;
 }
 
 .filterBar form {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 150px;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr) 120px;
+  align-items: end;
   grid-gap: 30px;
 }
 
 .filterBar form label {
+  margin-bottom: 5px;
   display: block;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .filterBar form input, .filterBar form select {
+  padding: 10px;
   width: 100%;
+  border: 1px solid #1E2019;
+}
+
+.filterBar form select {
+  background-color: #fff;
+  background-image: url(../images/caret-down.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  border-radius: 0;
+  cursor: pointer;
+
+  /* Remove default select styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+}
+
+.filterBar form select:disabled {
+  cursor: default;
+}
+
+.filterBar input[type=submit] {
+  font-weight: 700; 
+  background: #fff;
+  cursor: pointer;
 }
 
 .no-results {
@@ -26,11 +80,22 @@
 .events {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   grid-gap: 30px;
 }
 
 .event {
   padding: 10px 20px;
-  border: 1px solid black;
+  background: #FFFFFA;
+  border: 1px solid #1E2019;
+}
+
+@media (max-width: 768px) {
+  .filterBar form {
+    grid-template-columns: 1fr;
+  }
+
+  .events {
+    grid-template-columns: 1fr;
+  }
 }

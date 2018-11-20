@@ -9,7 +9,7 @@ class FilterBar extends React.Component {
   }
 
   render() {
-    const {eventTypes, handleFormSubmit} = this.props;
+    const {eventTypes, handleFormSubmit, handleSelectChange} = this.props;
     // Conditionally disable the event type select bar depending on if event types are present or not
     let disabled = (!eventTypes.length ? true : null);
     
@@ -28,7 +28,7 @@ class FilterBar extends React.Component {
 
           <div>
             <label htmlFor="eventType">Event Type</label>
-            <select name="eventType" id="eventType" placeholder="eventType" ref={this.eventType} disabled={disabled ? true : null}>
+            <select name="eventType" id="eventType" placeholder="eventType" ref={this.eventType} onChange={handleSelectChange} disabled={disabled ? true : null}>
               <option value="">Select an Event Type</option>
               {/* Loop through all event types present in the repo */}
               {eventTypes.map((eventType, key) => {
