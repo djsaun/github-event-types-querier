@@ -17,12 +17,12 @@ class FilterBar extends React.Component {
       <div className="filterBar"> 
         <form onSubmit={handleFormSubmit}>
           <div>
-            <label htmlFor="owner">Owner</label>
+            <label htmlFor="owner">Owner*</label>
             <input name="owner" id="owner" ref={this.owner}></input>
           </div>
 
           <div>
-            <label htmlFor="repo">Repository</label>
+            <label htmlFor="repo">Repository*</label>
             <input name="repo" id="repo" ref={this.repo}></input>
           </div>
 
@@ -37,7 +37,7 @@ class FilterBar extends React.Component {
             </select>
           </div>
 
-          <input type="submit" value="Submit" />
+          <button className="submitButton">Submit</button>
         </form>
       </div>
     )

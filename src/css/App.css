@@ -66,10 +66,19 @@ a:hover, a:active, a:focus {
   cursor: default;
 }
 
-.filterBar input[type=submit] {
-  font-weight: 700; 
+.submitButton {
+  padding: 10px;
+  font-weight: 700;
   background: #fff;
+  border: 1px solid #1E2019;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  color: #fff;
+  background: #7EA2AA;
+  border-color: #7EA2AA;
 }
 
 .no-results {
