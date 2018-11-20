@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-class Repos extends React.Component {
+class Events extends React.Component {
 
   render() {
     const { displayedEvents } = this.props;
@@ -20,4 +20,4 @@ class Repos extends React.Component {
   }
 }
 
-export default Repos;
+export default Events;

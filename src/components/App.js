@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FilterBar from './FilterBar';
-import Repos from './Repos';
+import Events from './Events';
 import '../css/App.css';
 import axios from 'axios';
 
@@ -96,7 +96,7 @@ class App extends Component {
       <div className="App container">
         <FilterBar handleFormSubmit={this.handleFormSubmit} handleSelectChange={this.handleSelectChange} eventTypes={this.state.eventTypes} />
         {(!this.state.error_message) ?
-        <Repos events={this.state.events} displayedEvents={this.state.displayedEvents} />
+        <Events events={this.state.events} displayedEvents={this.state.displayedEvents} />
         : 
         <div className="no-results"> 
           <p>Unable to find any events. Please try again.</p>
