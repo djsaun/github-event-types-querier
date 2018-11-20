@@ -10,6 +10,12 @@ class FilterBar extends React.Component {
 
   render() {
     const {eventTypes, handleFormSubmit, handleSelectChange} = this.props;
+
+    // Alphabetize the event types
+    eventTypes.sort((a, b) => {
+      return (a < b ? -1 : 1);
+    });
+
     // Conditionally disable the event type select bar depending on if event types are present or not
     let disabled = (!eventTypes.length ? true : null);
     
