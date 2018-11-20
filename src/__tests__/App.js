@@ -20,3 +20,15 @@ describe('Converts the GitHub timestamp to a readable format', () => {
     expect(format(new Date(timestamp), 'h:mma')).toBe('10:55am');
   });
 })
+
+describe('Alphabetizes event types', () => {
+  const eventTypes = ['PushEvent', 'CreateEvent', 'ForkEvent', 'DeleteEvent'];
+
+  it('Properly alphabetizes the event types in ascending order', () => {
+    eventTypes.sort((a, b) => {
+      return (a < b ? -1 : 1);
+    });
+
+    expect(eventTypes).toEqual(['CreateEvent', 'DeleteEvent', 'ForkEvent', 'PushEvent']);
+  });
+})
